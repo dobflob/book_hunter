@@ -90,6 +90,7 @@ Welcome to Phrase Hunter: Challenged Book Edition
                     ** Please enter Y to play again or N to quit. **
                     ''')
 
+
     def give_feedback(self, missed, guesses):
         print(f'\nRemaining Misses: {5 - missed}')
         if guesses:
@@ -109,5 +110,4 @@ Congrats! You guessed it with only {self.missed} wrong guess(es).
 Bummer, you ran out of guesses. Better luck next time.
 x   x   x   x   x   x   x   x   x   x   x   x   x   x 
                   ''')
-        
         print(f'The challenged book was: {self.active_phrase}.\n\n')

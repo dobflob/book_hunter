@@ -39,7 +39,8 @@ Welcome to Phrase Hunter: Challenged Book Edition
 
 
     def get_guess(self):
-        guess = input('\nGuess a letter: ').lower()
+        self.give_feedback(self.missed, self.guesses)
+        guess = input('\n>> Guess a letter: ').lower()
         guess_error = True
         while guess_error:
             # check that user input is a letter
@@ -52,7 +53,8 @@ Welcome to Phrase Hunter: Challenged Book Edition
                 print('''
                     ** Guesses must be a single letter. Try again. **
                     ''')
-                guess = input('\nGuess a letter: ').lower()
+                self.give_feedback(self.missed, self.guesses)
+                guess = input('\n>> Guess a letter: ').lower()
 
 
     def start(self):
@@ -76,7 +78,7 @@ Welcome to Phrase Hunter: Challenged Book Edition
 
         play_again_error = True
         while play_again_error:
-            play_again = input('Do you want to play again? (Y/N)  ')
+            play_again = input('>> Do you want to play again? (Y/N)  ')
             if play_again.lower() == 'y':
                 play_again_error = False
                 return True
@@ -88,18 +90,24 @@ Welcome to Phrase Hunter: Challenged Book Edition
                     ** Please enter Y to play again or N to quit. **
                     ''')
 
-        
+    def give_feedback(self, missed, guesses):
+        print(f'\nRemaining Misses: {5 - missed}')
+        if guesses:
+            print(f'Already Guessed: {', '.join(guesses)}')
+        print('--------------------')
+
+
     def game_over(self, result):
         if result == 'won':
             print(f'''
-                  
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *                  
 Congrats! You guessed it with only {self.missed} wrong guess(es).
----------------------------------------------------
+*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * 
                   ''')
         else:
             print('''
 Bummer, you ran out of guesses. Better luck next time.
-------------------------------------------------------
+x   x   x   x   x   x   x   x   x   x   x   x   x   x 
                   ''')
         
         print(f'The challenged book was: {self.active_phrase}.\n\n')
